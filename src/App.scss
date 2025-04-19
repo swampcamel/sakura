@@ -22,6 +22,30 @@
         }
     }
 
+    .nav-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 5;
+        display: flex;
+        justify-content: end;
+        width: 100%;
+        span {
+            text-align: center;
+            margin: 16px;
+            padding: 8px 4px;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border-radius: 24px;
+            filter: drop-shadow(1px 1px 2px #000);
+            cursor: pointer;
+            width: 140px;
+            background-color: rgba(255, 181, 251, 0.5);
+        }
+    }
+
     .container {
         position:relative;
         z-index: 1;

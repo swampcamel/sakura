@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import  ReactPlayer from 'react-player';
 import ReactHowler from 'react-howler';
 import BG from  './assets/video/bg.mp4';
 import Play from './assets/img/play.svg';
 import Pause from './assets/img/pause.svg';
+import Map from './assets/img/map.jpg';
 import FluteImg from './assets/img/flute.svg';
 import ShamisenImg from './assets/img/shamisen.svg';
 import BiwaImg from './assets/img/biwa.svg';
@@ -86,6 +88,24 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentAudio, setCurrentAudio] = useState([null]);
   const [isMobile, setIsMobile] = useState(false);
+  let [isInfoOpen, setIsInfoOpen] = useState(false);
+  let [isMapOpen, setIsMapOpen] = useState(false);
+
+  function openInfo() {
+    setIsInfoOpen(true);
+  }
+
+  function closeInfo() {
+    setIsInfoOpen(false);
+  }
+
+  function openMap() {
+    setIsMapOpen(true);
+    }
+
+  function closeMap() {
+    setIsMapOpen(false);
+  }
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -168,7 +188,71 @@ const App = () => {
 
   return (
     <div className="hunt-app">
-        <div class="nav-bar"></div>
+        <Dialog open={isInfoOpen} as="div" className="relative z-80 focus:outline-none" onClose={closeInfo}>
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4">
+            <DialogPanel
+              transition
+              className="w-full max-w-xl rounded-xl bg-white/5 p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+            >
+              <DialogTitle as="h3" className="text-base/7 font-medium text-white">
+                Game Info
+              </DialogTitle>
+              <p className="mt-2 text-md/6 text-white/50">
+                This is a Scavenger Hunt! When you find a character, look for a keyword in their dialog in caps and brackets like this: [KEYWORD].
+              </p>
+              <p className="mt-2 text-md/6 text-white/50">
+                Once you find the keyword, type it into the input field below. If you find the correct keyword, you'll unlock a new instrument!
+              </p>
+              <p className="mt-2 text-md/6 text-white/50">
+                Once you've unlocked an instrument, you can play it by clicking on the instrument icon.
+            </p>
+                <p className="mt-2 text-md/6 text-white/50">
+                You can also play a combination of instruments by clicking on the play icon in the center.
+                </p>
+                <p className="mt-2 text-md/6 text-white/50">
+                Good luck, Adventurer!
+                </p>
+              <div className="mt-4">
+                <Button
+                  className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
+                  onClick={closeInfo}
+                >
+                  Got it, thanks!
+                </Button>
+              </div>
+            </DialogPanel>
+          </div>
+        </div>
+        </Dialog>
+        <Dialog open={isMapOpen} as="div" className="relative z-80 focus:outline-none" onClose={closeMap}>
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4">
+            <DialogPanel
+              transition
+              className="w-full max-w-8/10 rounded-xl bg-white/5 p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+            >
+              <DialogTitle as="h3" className="text-base/7 font-medium text-white">
+                <div className=" flex justify-between">Game Map <Button
+                  className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
+                  onClick={closeMap}
+                >
+                  Close
+                </Button>
+                </div>
+              </DialogTitle>
+              <img src={Map} alt="Map" className="w-full h-auto" />
+              <div className="mt-4">
+                
+              </div>
+            </DialogPanel>
+          </div>
+        </div>
+        </Dialog>
+        <div className="nav-bar">
+            <span className="info" onClick={openInfo}>Game Info</span>
+            <span className="map" onClick={openMap}>Map</span>
+        </div>
         <div className="video-wrapper">
             <ReactPlayer 
                 url={BG} 
