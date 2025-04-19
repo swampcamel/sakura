@@ -202,7 +202,7 @@ const App = () => {
                 This is a Scavenger Hunt! When you find a character, look for a keyword in their dialog in caps and brackets like this: [KEYWORD].
               </p>
               <p className="mt-2 text-md/6 text-white/50">
-                Once you find the keyword, type it into the input field below. If you find the correct keyword, you'll unlock a new instrument!
+                Once you find the keyword, type it into the input field for that character's instrument. If you find the correct keyword, you'll unlock their instrument!
               </p>
               <p className="mt-2 text-md/6 text-white/50">
                 Once you've unlocked an instrument, you can play it by clicking on the instrument icon.
