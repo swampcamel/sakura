@@ -55,13 +55,14 @@
         }
     }
 
-    .container {
+    .app-container {
         position:relative;
         z-index: 1;
         display: flex;
         justify-content: center;
         align-items: stretch;
         height: 100%;
+        width: 100%;
 
         @media screen and (max-width: 768px) {
             flex-direction: column;
@@ -115,6 +116,10 @@
         input {
             height: 20px;
             padding: 6px;
+            background-color: #141414;
+            border-radius: 24px;
+            font-size: 16px;
+            width: 200px;
         }
 
         @media screen and (max-width: 768px) {
@@ -128,8 +133,7 @@
             input {
                 height: 14px;
                 font-size: 14px;
-                background-color: #141414;
-                border-radius: 24px;
+                
                 width: 180px;
                 height: 20px;
             }

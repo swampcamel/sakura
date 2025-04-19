@@ -264,7 +264,7 @@ const App = () => {
             />
         </div>
       {/* Left side - Input fields */}
-        <div className="container">
+        <div className="app-container">
             <div className="left-col">
                 <h2>Unlock Instruments</h2>
                 <div className="control-container">
