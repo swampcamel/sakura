@@ -168,6 +168,7 @@ const App = () => {
 
   return (
     <div className="hunt-app">
+        <div class="nav-bar"></div>
         <div className="video-wrapper">
             <ReactPlayer 
                 url={BG} 
@@ -192,14 +193,14 @@ const App = () => {
                                 type="text"
                                 value={keywords[index]}
                                 onChange={(e) => handleKeywordChange(index, e.target.value)}
-                                placeholder={`Enter keyword for ${instrument.name}`}
+                                placeholder={`Enter word for ${instrument.name}`}
                                 className="input-field"
                             />
-                            {unlockedInstruments.includes(instrument.id) && (
                                 <div className="unlocked-message">
-                                🎉 Unlocked: {instrument.name}!
-                                </div>
+                            {unlockedInstruments.includes(instrument.id) && (
+                                <span>🎉 Unlocked: {instrument.name}!</span>
                             )}
+                                </div>
                         </div>
                     ))}
                 </div>
