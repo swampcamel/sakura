@@ -1,7 +1,9 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import  ReactPlayer from 'react-player';
 import ReactHowler from 'react-howler';
 import BG from  './assets/video/bg.mp4';
+import Play from './assets/img/play.svg';
+import Pause from './assets/img/pause.svg';
 import FluteImg from './assets/img/flute.svg';
 import ShamisenImg from './assets/img/shamisen.svg';
 import BiwaImg from './assets/img/biwa.svg';
@@ -62,7 +64,7 @@ const INSTRUMENTS = [
   { 
     id: 6, 
     name: 'Horagai', 
-    keyword: 'something', 
+    keyword: 'sip', 
     imgSrc: HoragaiImg,
     audioSrc: [HoragaiSrc]
   }
@@ -83,7 +85,19 @@ const App = () => {
   const [currentInstrument, setCurrentInstrument] = useState({id: 0});
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentAudio, setCurrentAudio] = useState([null]);
-  const audioRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+        setIsMobile(window.innerWidth <= 768);
+    }
+
+    checkIsMobile();
+
+    window.addEventListener('resize', checkIsMobile);
+
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
 
   const handleKeywordChange = (index, value) => {
     const newKeywords = [...keywords];
@@ -155,7 +169,14 @@ const App = () => {
   return (
     <div className="hunt-app">
         <div className="video-wrapper">
-            <ReactPlayer url={BG} playing loop muted width={'200vh'} height={'100%'} />
+            <ReactPlayer 
+                url={BG} 
+                playing 
+                loop 
+                muted 
+                width={isMobile ? 'auto' : '100vw'}
+                height={isMobile ? '100vh' : 'auto'} 
+            />
         </div>
       {/* Left side - Input fields */}
         <div className="container">
@@ -194,9 +215,9 @@ const App = () => {
                     <div className="instrument play-all">
                         <button
                         onClick={playCombination}
-                        className={`p-4 rounded-full ${currentAudio === 'conductor' && isPlaying ? 'bg-red-500' : 'bg-blue-500'} text-white flex items-center justify-center shadow-lg hover:opacity-90 transition`}
+                        className={`play-btn ${currentInstrument.id === 0 && isPlaying ? 'red' : 'green'}`}
                         >
-                            Play All
+                            { currentInstrument.id === 0 && isPlaying ? <img src ={Pause} alt="Pause" /> : <img src ={Play} alt="Play" />}
                         </button>
                     </div>
                     )}
@@ -206,9 +227,8 @@ const App = () => {
                         unlockedInstruments.includes(instrument.id)
                     ).map(instrument => (
                         <div key={instrument.id} className={`instrument ${instrument.name.toLowerCase()}`}>
-                            <img className="img-control" src={instrument.imgSrc} alt ={instrument.name}
+                            <img className="img-control" src={instrument.imgSrc} alt={instrument.name}
                                 onClick={() => playInstrument(instrument.id)}
-                            
                             >
                                 {instrument.icon}
                             </img>
@@ -217,7 +237,7 @@ const App = () => {
                     ))}
                 </div>
                 ) : (
-                <div className="flex-1 flex items-center justify-center text-gray-500 text-xl">
+                <div className="default-msg">
                     Enter keywords to unlock instruments
                 </div>
                 )}
