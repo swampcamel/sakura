@@ -298,12 +298,12 @@ const App = () => {
                     {/* Conductor in the middle */}
                     {unlockedInstruments.length > 1 && (
                     <div className="instrument play-all">
-                        <button
+                        <div
                         onClick={playCombination}
                         className={`play-btn ${currentInstrument.id === 0 && isPlaying ? 'red' : 'green'}`}
                         >
                             { currentInstrument.id === 0 && isPlaying ? <img src ={Pause} alt="Pause" /> : <img src ={Play} alt="Play" />}
-                        </button>
+                        </div>
                     </div>
                     )}
                     

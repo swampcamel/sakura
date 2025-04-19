@@ -100,11 +100,10 @@
         align-items: center;
 
         label, input {
-            margin-right: 20px;
             font-size: 18px;
+            margin-right: 16px;
         }
         input {
-            border-radius: 12px;
             height: 20px;
             padding: 6px;
         }
@@ -148,13 +147,17 @@
             transform: translate(-50%, -50%);
 
             .play-btn {
-                height: 45px;
-                width: 45px;
+                
                 border-radius: 50%;
                 font-family: "Winky Sans", sans-serif;
                 text-transform: uppercase;
                 line-height: 100%;
                 font-size: 16px;
+
+                img {
+                    height: 45px;
+                    width: 45px;
+                }
                 
                 &.red {
                     background-color: rgb(191, 218, 111);
